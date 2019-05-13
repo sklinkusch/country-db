@@ -12,7 +12,6 @@ export default function Sidebar() {
             const sidebarArray = value.selectedCountries.map((country, index) => <SidebarCountry key={index} country={country} />)
             return (
               <React.Fragment>
-                <input placeholder="Filter countries" onChange={value.handleChange} />
                 {sidebarArray}
               </React.Fragment>
             )
