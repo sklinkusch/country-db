@@ -5,20 +5,32 @@ export default class AppProvider extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      countries: []
+      countries: [],
+      selectedCountries: [],
+      handleChange: (inputField) => {
+        const inputValue = inputField.target.value;
+        const selection = this.state.countries.filter(country => {
+          if (inputValue !== "") {
+            return country.name.toLowerCase().includes(inputValue.toLowerCase())
+          } else {
+            return true;
+          }
+        });
+        this.setState({ selectedCountries: selection });
+      }
     }
   }
   componentDidMount() {
     const url = "https://restcountries.eu/rest/v2/all"
     fetch(url)
       .then(response => response.json())
-      .then(countries => this.setState({ countries }))
+      .then(countries => this.setState({ countries: countries, selectedCountries: countries }))
       .catch(error => console.error);
   }
   render() {
-    console.log(this.state.countries)
+    // console.log(this.state.countries)
     return (
-      <AppContext.Provider value={this.state.countries}>
+      <AppContext.Provider value={this.state}>
         {this.props.children}
       </AppContext.Provider >
     )
