@@ -59,7 +59,7 @@ export default function CountryInfo() {
                 </div>
                 <div className="row">
                   <div className="desc">Calling Codes</div>
-                  <div className="info">{value.currentCountry.callingCodes.map(code => `+${code}`).join(", ") || "None"}</div>
+                  <div className="info">{value.currentCountry.callingCodes.length > 0 ? value.currentCountry.callingCodes.map(code => `+${code}`).join(", ") : "None"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Top-level domain</div>
