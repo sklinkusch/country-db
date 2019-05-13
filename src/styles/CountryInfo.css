@@ -1,0 +1,19 @@
+.country-info {
+  flex: 0 0 65%;
+  text-align: center;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-bottom: 10px;
+}
+.desc {
+  flex: 0 0 40%;
+  text-align: left;
+  font-weight: bold;
+}
+.info {
+  flex: 0 0 55%;
+  text-align: left;
+}

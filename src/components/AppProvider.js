@@ -7,6 +7,7 @@ export default class AppProvider extends Component {
     this.state = {
       countries: [],
       selectedCountries: [],
+      currentCountry: {},
       handleChange: (inputField) => {
         const inputValue = inputField.target.value;
         const selection = this.state.countries.filter(country => {
@@ -17,6 +18,11 @@ export default class AppProvider extends Component {
           }
         });
         this.setState({ selectedCountries: selection });
+      },
+      handleClick: (event) => {
+        const chosenCountry = event.target.innerText;
+        const countryInfo = this.state.countries.filter(country => country.name === chosenCountry);
+        this.setState({ currentCountry: countryInfo[0] })
       }
     }
   }
