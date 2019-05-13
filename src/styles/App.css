@@ -8,6 +8,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin-left: 15px;
+  justify-content: space-between;
+  margin-right: 15px;
 }
 .App main {
   display: flex;
