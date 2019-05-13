@@ -4,9 +4,9 @@ import AppContext from './AppContext';
 export default function SidebarCountry(props) {
   return (
     <AppContext.Consumer>
-      {(value) => (<p className="country-short" onClick={value.handleClick}>
+      {(value) => (<div className="country-short" onClick={value.handleClick}>
         {props.country.name}
-      </p>)}
+      </div>)}
     </AppContext.Consumer>
   )
 }
