@@ -65,6 +65,7 @@ export default function CountryInfo() {
                   <div className="desc">Top-level domain</div>
                   <div className="info">{value.currentCountry.topLevelDomain.join(", ") || "None"}</div>
                 </div>
+                <img src={value.currentCountry.flag} alt="flag" />
               </>
             }
           </div>

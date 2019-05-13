@@ -19,3 +19,7 @@
   flex: 0 0 55%;
   text-align: left;
 }
+img {
+  width: 50%;
+  max-width: 300px;
+}
