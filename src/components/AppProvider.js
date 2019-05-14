@@ -8,6 +8,7 @@ export default class AppProvider extends Component {
       countries: [],
       selectedCountries: [],
       currentCountry: {},
+      languages: [{ short: "en", name: "English" }, { short: "br", name: "Brazilian Portuguese" }, { short: "hr", name: "Croatian" }, { short: "nl", name: "Dutch" }, { short: "fa", name: "Farsi" }, { short: "fr", name: "French" }, { short: "de", name: "German" }, { short: "it", name: "Italian" }, { short: "ja", name: "Japanese" }, { short: "pt", name: "Portuguese" }, { short: "es", name: "Spanish" }],
       language: "en",
       handleChange: (inputField) => {
         const inputValue = inputField.target.value;
