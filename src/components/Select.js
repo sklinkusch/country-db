@@ -7,7 +7,7 @@ export default function Select() {
       {value => {
         return (<div className="selectcontainer">
           <select onChange={value.handleLang}>
-            {value.languages.map(lang => <option value={lang.short}>{lang.name}</option>)}
+            {value.languages.map((lang, index) => <option key={index} value={lang.short}>{lang.name}</option>)}
           </select>
         </div>)
       }

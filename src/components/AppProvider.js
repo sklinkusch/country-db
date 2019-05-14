@@ -12,9 +12,18 @@ export default class AppProvider extends Component {
       language: "en",
       handleChange: (inputField) => {
         const inputValue = inputField.target.value;
+        const lang = this.state.language;
+        console.log(inputValue);
+        console.log(lang);
         const selection = this.state.countries.filter(country => {
-          if (inputValue !== "") {
-            return country.name.toLowerCase().includes(inputValue.toLowerCase())
+          if (inputValue !== "" && inputValue !== null) {
+            if (lang === "en") {
+              return country.name.toLowerCase().includes(inputValue.toLowerCase())
+            } else {
+              if (country.translations[lang] !== null) {
+                return country.translations[lang].toLowerCase().includes(inputValue.toLowerCase())
+              }
+            }
           } else {
             return true;
           }
