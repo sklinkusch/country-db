@@ -17,8 +17,8 @@ export default function CountryInfo() {
         let coord;
         if (value.currentCountry.latlng !== null && value.currentCountry.latlng !== undefined) {
           const [lat, lng] = value.currentCountry.latlng;
-          const latitude = lat > 0 ? `${lat}°N` : `${-lat}°S`;
-          const longitude = lng > 0 ? `${lng}°E` : `${-lng}°W`;
+          const latitude = lat > 0 ? `${lat.toFixed(2)}°N` : `${-lat.toFixed(2)}°S`;
+          const longitude = lng > 0 ? `${lng.toFixed(2)}°E` : `${-lng.toFixed(2)}°W`;
           coord = `${latitude}, ${longitude}`;
         } else {
           coord = "Not specified"
