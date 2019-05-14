@@ -14,6 +14,15 @@ export default function CountryInfo() {
             name = value.currentCountry.name
           }
         }
+        let coord;
+        if (value.currentCountry.latlng !== null && value.currentCountry.latlng !== undefined) {
+          const [lat, lng] = value.currentCountry.latlng;
+          const latitude = lat > 0 ? `${lat}°N` : `${-lat}°S`;
+          const longitude = lng > 0 ? `${lng}°E` : `${-lng}°W`;
+          coord = `${latitude}, ${longitude}`;
+        } else {
+          coord = "Not specified"
+        }
         return (
           <div className="country-info">
             <h2 className="titlebar">
@@ -27,15 +36,15 @@ export default function CountryInfo() {
                 </div>
                 <div className="row">
                   <div className="desc">Alternative spellings</div>
-                  <div className="info">{value.currentCountry.altSpellings.join(", ")}</div>
+                  <div className="info">{value.currentCountry.altSpellings.join(", ") || "None"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Region</div>
-                  <div className="info">{value.currentCountry.region}</div>
+                  <div className="info">{value.currentCountry.region || "Not specified"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Subregion</div>
-                  <div className="info">{value.currentCountry.subregion || "None"}</div>
+                  <div className="info">{value.currentCountry.subregion || "Not specified"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Area</div>
@@ -43,11 +52,11 @@ export default function CountryInfo() {
                 </div>
                 <div className="row">
                   <div className="desc">Population</div>
-                  <div className="info">{value.currentCountry.population || "0"} inhabitants</div>
+                  <div className="info">{value.currentCountry.population || "No"} inhabitants</div>
                 </div>
                 <div className="row">
                   <div className="desc">Capital</div>
-                  <div className="info">{value.currentCountry.capital || "None"}</div>
+                  <div className="info">{value.currentCountry.capital || "Not specified"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Borders</div>
@@ -67,11 +76,11 @@ export default function CountryInfo() {
                 </div>
                 <div className="row">
                   <div className="desc">Calling Codes</div>
-                  <div className="info">{value.currentCountry.callingCodes.length > 0 ? value.currentCountry.callingCodes.map(code => `+${code}`).join(", ") : "None"}</div>
+                  <div className="info">{value.currentCountry.callingCodes.length > 0 ? value.currentCountry.callingCodes.map(code => `+${code}`).join(", ") : "Not specified"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Top-level domain</div>
-                  <div className="info">{value.currentCountry.topLevelDomain.join(", ") || "None"}</div>
+                  <div className="info">{value.currentCountry.topLevelDomain.join(", ") || "Not specified"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Country code</div>
@@ -80,6 +89,10 @@ export default function CountryInfo() {
                 <div className="row">
                   <div className="desc">Regional blocs</div>
                   <div className="info">{value.currentCountry.regionalBlocs.map(bloc => bloc.name).join(", ") || "None"}</div>
+                </div>
+                <div className="row">
+                  <div className="desc">Geographic coordinates</div>
+                  <div className="info">{coord}</div>
                 </div>
                 <img src={value.currentCountry.flag} alt="flag" />
               </>
