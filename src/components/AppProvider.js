@@ -23,7 +23,13 @@ export default class AppProvider extends Component {
       },
       handleClick: (event) => {
         const chosenCountry = event.target.innerText;
-        const countryInfo = this.state.countries.filter(country => country.name === chosenCountry);
+        const lang = this.state.language;
+        let countryInfo;
+        if (lang === "en") {
+          countryInfo = this.state.countries.filter(country => country.name === chosenCountry);
+        } else {
+          countryInfo = this.state.countries.filter(country => country.translations[lang] === chosenCountry);
+        }
         this.setState({ currentCountry: countryInfo[0] })
       },
       handleLang: (event) => {
