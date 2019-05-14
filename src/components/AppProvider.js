@@ -25,6 +25,7 @@ export default class AppProvider extends Component {
           } else {
             return true;
           }
+          return null;
         });
         this.setState({ selectedCountries: selection });
       },

@@ -22,6 +22,14 @@ export default function CountryInfo() {
             {"region" in value.currentCountry &&
               <>
                 <div className="row">
+                  <div className="desc">Native name</div>
+                  <div className="info">{value.currentCountry.nativeName}</div>
+                </div>
+                <div className="row">
+                  <div className="desc">Alternative spellings</div>
+                  <div className="info">{value.currentCountry.altSpellings.join(", ")}</div>
+                </div>
+                <div className="row">
                   <div className="desc">Region</div>
                   <div className="info">{value.currentCountry.region}</div>
                 </div>
@@ -64,6 +72,14 @@ export default function CountryInfo() {
                 <div className="row">
                   <div className="desc">Top-level domain</div>
                   <div className="info">{value.currentCountry.topLevelDomain.join(", ") || "None"}</div>
+                </div>
+                <div className="row">
+                  <div className="desc">Country code</div>
+                  <div className="info">{value.currentCountry.alpha3Code}</div>
+                </div>
+                <div className="row">
+                  <div className="desc">Regional blocs</div>
+                  <div className="info">{value.currentCountry.regionalBlocs.map(bloc => bloc.name).join(", ") || "None"}</div>
                 </div>
                 <img src={value.currentCountry.flag} alt="flag" />
               </>
