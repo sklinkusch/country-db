@@ -9,7 +9,7 @@ export default function Sidebar() {
       <AppContext.Consumer>
         {value => {
           {
-            const sidebarArray = value.selectedCountries.map((country, index) => <SidebarCountry key={index} country={country} />)
+            const sidebarArray = value.selectedCountries.map((country, index) => <SidebarCountry key={index} country={country} lang={value.language} />)
             return (
               <React.Fragment>
                 {sidebarArray}

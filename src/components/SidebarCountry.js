@@ -4,9 +4,13 @@ import AppContext from './AppContext';
 export default function SidebarCountry(props) {
   return (
     <AppContext.Consumer>
-      {(value) => (<div className="country-short" onClick={value.handleClick}>
-        {props.country.name}
-      </div>)}
+      {(value) => {
+        let name;
+        name = props.lang === "en" ? props.country.name : props.country.translations[props.lang];
+        return (<div className="country-short" onClick={value.handleClick}>
+          {name}
+        </div>)
+      }}
     </AppContext.Consumer>
   )
 }
