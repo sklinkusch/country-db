@@ -12,7 +12,7 @@ The page features
   - name in the native language
   - a list of alternative spellings
   - region and subregion
-  - area in m<sup>2</sup>
+  - area in km<sup>2</sup>
   - number of inhabitants
   - capital city
   - a list of bordering countries, abbreviated by their country codes
