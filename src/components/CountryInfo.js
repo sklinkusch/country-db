@@ -15,7 +15,7 @@ export default function CountryInfo() {
           }
         }
         let coord;
-        if (value.currentCountry.latlng !== null && value.currentCountry.latlng !== undefined) {
+        if (value.currentCountry.latlng !== null && value.currentCountry.latlng !== undefined && value.currentCountry.latlng.length > 0) {
           const [lat, lng] = value.currentCountry.latlng;
           const latitude = lat > 0 ? `${lat.toFixed(2)}°N` : `${-lat.toFixed(2)}°S`;
           const longitude = lng > 0 ? `${lng.toFixed(2)}°E` : `${-lng.toFixed(2)}°W`;
@@ -48,7 +48,7 @@ export default function CountryInfo() {
                 </div>
                 <div className="row">
                   <div className="desc">Area</div>
-                  <div className="info">{value.currentCountry.area || "0"} square metres</div>
+                  <div className="info">{value.currentCountry.area || "0"} square kilometres</div>
                 </div>
                 <div className="row">
                   <div className="desc">Population</div>
@@ -56,7 +56,7 @@ export default function CountryInfo() {
                 </div>
                 <div className="row">
                   <div className="desc">Capital</div>
-                  <div className="info">{value.currentCountry.capital || "Not specified"}</div>
+                  <div className="info">{value.currentCountry.capital !== null && value.currentCountry.capital !== undefined && value.currentCountry.capital !== "" ? value.currentCountry.capital : "Not specified"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Borders</div>
@@ -76,7 +76,7 @@ export default function CountryInfo() {
                 </div>
                 <div className="row">
                   <div className="desc">Calling Codes</div>
-                  <div className="info">{value.currentCountry.callingCodes.length > 0 ? value.currentCountry.callingCodes.map(code => `+${code}`).join(", ") : "Not specified"}</div>
+                  <div className="info">{value.currentCountry.callingCodes.length > 0 ? value.currentCountry.callingCodes.filter(code => code !== "").map(code => `+${code}`).join(", ") || "Not specified" : "Not specified"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Top-level domain</div>
