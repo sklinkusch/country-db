@@ -1,6 +1,7 @@
 import React from 'react'
 import AppContext from './AppContext';
 import "../styles/CountryInfo.css";
+import worldCountries from "world-countries/dist/countries.json"
 
 export default function CountryInfo() {
   return (
@@ -49,7 +50,10 @@ export default function CountryInfo() {
                 </div>
                 <div className="row">
                   <div className="desc">Borders</div>
-                  <div className="info">{value.currentCountry.borders.join(", ") || "None"}</div>
+                  <div className="info">{value.currentCountry.borders.map(code => {
+                    const [thisCountry] = worldCountries.filter(country => country.cca3 === code)
+                    return thisCountry.name.common
+                  }).sort((a,b) => a.localeCompare(b, "en", { sensitivity: "base"})).join(", ") || "None"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Currency</div>
