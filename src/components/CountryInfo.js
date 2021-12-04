@@ -1,19 +1,14 @@
 import React from 'react'
 import AppContext from './AppContext';
 import "../styles/CountryInfo.css";
+import worldCountries from "world-countries/dist/countries.json"
 
 export default function CountryInfo() {
+  const formatter = new Intl.NumberFormat('en-US')
   return (
     <AppContext.Consumer>
       {(value) => {
-        let name;
-        if (Object.keys(value.currentCountry).length !== 0) {
-          if (value.language in value.currentCountry.translations) {
-            name = value.currentCountry.translations[value.language]
-          } else {
-            name = value.currentCountry.name
-          }
-        }
+        const name = value.hasOwnProperty("currentCountry") && value.currentCountry.hasOwnProperty("name") && value.currentCountry.name.hasOwnProperty("common") ? value.currentCountry.name.common : "";
         let coord;
         if (value.currentCountry.latlng !== null && value.currentCountry.latlng !== undefined && value.currentCountry.latlng.length > 0) {
           const [lat, lng] = value.currentCountry.latlng;
@@ -31,8 +26,12 @@ export default function CountryInfo() {
             {"region" in value.currentCountry &&
               <>
                 <div className="row">
-                  <div className="desc">Native name</div>
-                  <div className="info">{value.currentCountry.nativeName}</div>
+                  <div className="desc">Native names</div>
+                  <div className="info">{Object.keys(value.currentCountry.name.native).map(lang => `${value.currentCountry.name.native[lang].common} (${value.currentCountry.languages[lang]})`).join(", ")}</div>
+                </div>
+                <div className="row">
+                  <div className="desc">Official name</div>
+                  <div className="info">{value.currentCountry.name.official}, {Object.keys(value.currentCountry.name.native).map(lang => `${value.currentCountry.name.native[lang].official} (${value.currentCountry.languages[lang]})`)}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Alternative spellings</div>
@@ -48,53 +47,47 @@ export default function CountryInfo() {
                 </div>
                 <div className="row">
                   <div className="desc">Area</div>
-                  <div className="info">{value.currentCountry.area || "0"} square kilometres</div>
+                  <div className="info">{formatter.format(value.currentCountry.area) || "0"} km<sup>2</sup></div>
                 </div>
                 <div className="row">
-                  <div className="desc">Population</div>
-                  <div className="info">{value.currentCountry.population || "No"} inhabitants</div>
-                </div>
-                <div className="row">
-                  <div className="desc">Capital</div>
-                  <div className="info">{value.currentCountry.capital !== null && value.currentCountry.capital !== undefined && value.currentCountry.capital !== "" ? value.currentCountry.capital : "Not specified"}</div>
+                  <div className="desc">Capital(s)</div>
+                  <div className="info">{value.currentCountry.capital != null && value.currentCountry.capital.length > 0 ? value.currentCountry.capital.join(", ") : "Not specified"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Borders</div>
-                  <div className="info">{value.currentCountry.borders.join(", ") || "None"}</div>
+                  <div className="info">{value.currentCountry.borders.map(code => {
+                    const [thisCountry] = worldCountries.filter(country => country.cca3 === code)
+                    return thisCountry.name.common
+                  }).sort((a,b) => a.localeCompare(b, "en", { sensitivity: "base"})).join(", ") || "None"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Currency</div>
-                  <div className="info">{value.currentCountry.currencies.map(currency => { return `${currency.name}${currency.symbol ? ` (${currency.symbol})` : ""}` }).join(",") || "None"}</div>
+                  <div className="info">{Object.keys(value.currentCountry.currencies).map(code => { 
+                    const currencyObject = value.currentCountry.currencies[code]
+                    const { name: currencyName, symbol: currencySymbol } = currencyObject
+                    return `${currencyName} (${code}, ${currencySymbol})`}).join(", ") || "None"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Languages</div>
-                  <div className="info">{value.currentCountry.languages.map(lang => lang.name).join(", ") || "None"}</div>
-                </div>
-                <div className="row">
-                  <div className="desc">Timezones</div>
-                  <div className="info">{value.currentCountry.timezones.join(", ") || "None"}</div>
-                </div>
-                <div className="row">
-                  <div className="desc">Calling Codes</div>
-                  <div className="info">{value.currentCountry.callingCodes.length > 0 ? value.currentCountry.callingCodes.filter(code => code !== "").map(code => `+${code}`).join(", ") || "Not specified" : "Not specified"}</div>
+                  <div className="info">{Object.values(value.currentCountry.languages).join(", ") || "None"}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Top-level domain</div>
-                  <div className="info">{value.currentCountry.topLevelDomain.join(", ") || "Not specified"}</div>
+                  <div className="info">{value.currentCountry.tld.join(", ") || "Not specified"}</div>
                 </div>
                 <div className="row">
-                  <div className="desc">Country code</div>
-                  <div className="info">{value.currentCountry.alpha3Code}</div>
+                  <div className="desc">Calling codes</div>
+                  <div className="info">{value.currentCountry.idd.suffixes.map(suffix => `${value.currentCountry.idd.root}${suffix}`).join(", ")}</div>
                 </div>
                 <div className="row">
-                  <div className="desc">Regional blocs</div>
-                  <div className="info">{value.currentCountry.regionalBlocs.map(bloc => bloc.name).join(", ") || "None"}</div>
+                  <div className="desc">Country codes</div>
+                  <div className="info">{value.currentCountry.cca2}, {value.currentCountry.cca3}</div>
                 </div>
                 <div className="row">
                   <div className="desc">Geographic coordinates</div>
                   <div className="info">{coord}</div>
                 </div>
-                <img src={value.currentCountry.flag} alt="flag" />
+                <span role="img" aria-label={value.currentCountry.cca2} style={{ fontSize: "48px"}}>{value.currentCountry.flag}</span>
               </>
             }
           </div>

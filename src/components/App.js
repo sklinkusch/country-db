@@ -4,7 +4,6 @@ import CountryInfo from './CountryInfo';
 import AppProvider from './AppProvider';
 import Sidebar from './Sidebar';
 import Title from './Title';
-import Select from './Select';
 
 function App() {
   return (
@@ -12,7 +11,6 @@ function App() {
       <div className="App">
         <header>
           <Title />
-          <Select />
         </header>
         <main>
           <Sidebar />
