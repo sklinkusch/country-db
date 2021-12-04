@@ -22,8 +22,7 @@ export default class AppProvider extends Component {
       },
       handleClick: (event) => {
         const chosenCountry = event.target.innerText;
-        let countryInfo;
-          countryInfo = this.state.countries.filter(country => country.name === chosenCountry);
+        const countryInfo = this.state.countries.filter(country => country.name.common === chosenCountry);
         this.setState({ currentCountry: countryInfo[0] })
       },
     }
