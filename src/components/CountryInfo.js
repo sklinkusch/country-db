@@ -75,6 +75,10 @@ export default function CountryInfo() {
                   <div className="info">{value.currentCountry.tld.join(", ") || "Not specified"}</div>
                 </div>
                 <div className="row">
+                  <div className="desc">Calling codes</div>
+                  <div className="info">{value.currentCountry.idd.suffixes.map(suffix => `${value.currentCountry.idd.root}${suffix}`).join(", ")}</div>
+                </div>
+                <div className="row">
                   <div className="desc">Country codes</div>
                   <div className="info">{value.currentCountry.cca2}, {value.currentCountry.cca3}</div>
                 </div>
