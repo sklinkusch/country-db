@@ -4,6 +4,7 @@ import "../styles/CountryInfo.css";
 import worldCountries from "world-countries/dist/countries.json"
 
 export default function CountryInfo() {
+  const formatter = new Intl.NumberFormat('en-US')
   return (
     <AppContext.Consumer>
       {(value) => {
@@ -46,7 +47,7 @@ export default function CountryInfo() {
                 </div>
                 <div className="row">
                   <div className="desc">Area</div>
-                  <div className="info">{value.currentCountry.area || "0"} square kilometres</div>
+                  <div className="info">{formatter.format(value.currentCountry.area) || "0"} km<sup>2</sup></div>
                 </div>
                 <div className="row">
                   <div className="desc">Capital(s)</div>
