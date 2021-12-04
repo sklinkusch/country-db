@@ -29,6 +29,10 @@ export default function CountryInfo() {
                   <div className="info">{Object.keys(value.currentCountry.name.native).map(lang => `${value.currentCountry.name.native[lang].common} (${value.currentCountry.languages[lang]})`).join(", ")}</div>
                 </div>
                 <div className="row">
+                  <div className="desc">Official name</div>
+                  <div className="info">{value.currentCountry.name.official}, {Object.keys(value.currentCountry.name.native).map(lang => `${value.currentCountry.name.native[lang].official} (${value.currentCountry.languages[lang]})`)}</div>
+                </div>
+                <div className="row">
                   <div className="desc">Alternative spellings</div>
                   <div className="info">{value.currentCountry.altSpellings.join(", ") || "None"}</div>
                 </div>
