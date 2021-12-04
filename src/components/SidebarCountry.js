@@ -1,12 +1,12 @@
 import React from 'react'
 import AppContext from './AppContext';
 
-export default function SidebarCountry(props) {
+export default function SidebarCountry({country}) {
   return (
     <AppContext.Consumer>
       {(value) => {
         let name;
-        name = props.lang === "en" ? props.country.name : props.country.translations[props.lang];
+        name = country.name.common
         return (<div className="country-short" onClick={value.handleClick}>
           {name}
         </div>)

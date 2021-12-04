@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import AppContext from './AppContext'
+import countryList from "world-countries/dist/countries.json"
 
 export default class AppProvider extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      countries: [],
-      selectedCountries: [],
+      countries: countryList,
+      selectedCountries: countryList,
       currentCountry: {},
       languages: [{ short: "en", name: "English" }, { short: "br", name: "Brazilian Portuguese" }, { short: "hr", name: "Croatian" }, { short: "nl", name: "Dutch" }, { short: "fa", name: "Farsi" }, { short: "fr", name: "French" }, { short: "de", name: "German" }, { short: "it", name: "Italian" }, { short: "ja", name: "Japanese" }, { short: "pt", name: "Portuguese" }, { short: "es", name: "Spanish" }],
       language: "en",
@@ -44,13 +45,6 @@ export default class AppProvider extends Component {
         this.setState({ language: event.target.value })
       }
     }
-  }
-  componentDidMount() {
-    const url = "https://restcountries.eu/rest/v2/all"
-    fetch(url)
-      .then(response => response.json())
-      .then(countries => this.setState({ countries: countries, selectedCountries: countries }))
-      .catch(error => console.error);
   }
   render() {
     // console.log(this.state.countries)
