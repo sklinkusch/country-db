@@ -1,5 +1,6 @@
 import React from 'react'
 import AppContext from './AppContext';
+import "../styles/SidebarCountry.css"
 
 export default function SidebarCountry({country}) {
   return (
