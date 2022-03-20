@@ -2,6 +2,6 @@
   flex: 0 0 30%;
   text-align: left;
   margin-left: 15px;
-  height: 93vh;
+  height: calc(100vh - 65px);
   overflow: scroll;
 }
